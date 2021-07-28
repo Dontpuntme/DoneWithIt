@@ -3,17 +3,15 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+  let x =1;
   console.log("App Executed Testing");
-
-  let x;
-  x.toString();
   
-  return (
+  return ( 
     <View style={styles.container}>
       <Text>Hello World</Text>
       <StatusBar style="auto" />
     </View>
-  );
+ );
 }
 
 const styles = StyleSheet.create({
