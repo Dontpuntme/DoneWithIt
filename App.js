@@ -1,30 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback,TouchableOpacity,Image, SafeAreaView, Button, Alert } from 'react-native';
+import React, { useState }from 'react';
+import { StyleSheet, Switch, SafeAreaView, View, Text} from 'react-native';
 
 export default function App() {
-  const handlePress = () => console.log("Text pressed")
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return ( 
-    <SafeAreaView style={styles.container}>
-      <Text numberOfLines = {1} onPress={handlePress}>Hello World</Text>
-      <Button color = "orange" title="Click me" onPress = {()=>Alert.alert("Button Tapped", "My Message", [{text: "Yes"},{ text: "No"}])}></Button>
-      <TouchableOpacity onPress={() => console.log("Image tapped")}>
-        <Image style = {styles.tinyLogo} source = {require('./assets/icon.png')}/>
-      </TouchableOpacity>
-      
+    <SafeAreaView style={[styles.container]}>
+      <View style={styles.task}>
+      <Text style = {{width: 100 ,}}> {"Brush Teeth"} </Text>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+      </View>
     </SafeAreaView>
  );
 }
+
+const containerStyle = {backgroundColor: "orange"};
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center', 
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start', 
   },
   tinyLogo: {
     width: 50,
     height: 50,
+  },
+  task: {
+    justifyContent: 'flex-start', 
+    alignItems: 'flex-start',
+    width: 500,
+    height: 100,
+    marginLeft: 50,
+    marginTop: 20,
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 });
